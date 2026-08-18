@@ -51,10 +51,10 @@ The backend helper is covered by deterministic tests for normal tasks, important
 
 ## 6. Deployment links
 
-- Frontend Deployment Link: To be added after deployment.
-- Backend Deployment Link: To be added after deployment.
+- Frontend Deployment Link: Not deployed in this sandbox; the client is configured for deployment through `VITE_API_URL`.
+- Backend Deployment Link: Not deployed in this sandbox; the server is ready to run with the configured Prisma database.
 
 ## 7. Pull request and explanation video
 
-- Pull Request Link: To be added after the repository is published.
-- Google Drive Video Link: To be added after the explanation video is uploaded and shared.
+- Pull Request Link: https://github.com/syedtalhas121-Kalvium/tasknest-productivity-improvement/pull/1
+- Google Drive Video Link: https://drive.google.com/file/d/1NxPb8wgXi_fmJxidkoF5UvSbEi9739qT/view?usp=sharing

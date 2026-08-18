@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { createTask } from '../services/api';
-import { Plus } from 'lucide-react';
+import { Plus, Star } from 'lucide-react';
 
 const TaskForm = ({ onTaskCreated }) => {
   const [title, setTitle] = useState('');
+  const [important, setImportant] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!title.trim()) return;
+
     try {
-      await createTask(title);
+      await createTask(title, important);
       setTitle('');
+      setImportant(false);
       onTaskCreated();
-    } catch (err) {
-      console.error('Error creating task:', err);
+    } catch (error) {
+      console.error('Error creating task:', error);
     }
   };
 
@@ -25,19 +28,29 @@ const TaskForm = ({ onTaskCreated }) => {
           <input
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(event) => setTitle(event.target.value)}
             placeholder="Focus on what matters..."
             className="styled-input"
+            aria-label="Task title"
           />
         </div>
-        <button type="submit" className="primary-button ">
+        <label className="important-toggle">
+          <input
+            type="checkbox"
+            checked={important}
+            onChange={(event) => setImportant(event.target.checked)}
+          />
+          <Star size={17} fill={important ? 'currentColor' : 'none'} />
+          <span>Mark as important</span>
+        </label>
+        <button type="submit" className="primary-button">
           <Plus size={20} strokeWidth={3} />
-          <span>Quick Add</span>
+          <span>Add Task</span>
         </button>
       </form>
       <div style={{ marginTop: '2rem', padding: '1rem', borderTop: '1px solid #f1f5f9' }}>
         <p className="text-muted" style={{ fontSize: '0.85rem' }}>
-          Assigning tasks helps our AI calculate your productivity score more accurately.
+          Important completed tasks earn bonus points, while completing tasks on different days builds consistency.
         </p>
       </div>
     </div>

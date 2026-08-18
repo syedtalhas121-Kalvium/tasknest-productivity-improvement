@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "prisma:seed": "node prisma/seed.js"
+    "prisma:seed": "node prisma/seed.js",
+    "test": "node utils/scoreHelper.test.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js",

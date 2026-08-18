@@ -1,87 +1,44 @@
-# TaskNest
+# TaskNest Productivity Improvement
 
-TaskNest is a lightweight task management application designed to help users organize their daily tasks.
+TaskNest is a React and Express task manager improved to make its Productivity Score deterministic and explainable. Users can mark tasks as important, and completed important tasks receive a bonus. Completing tasks on distinct days also contributes a capped consistency bonus.
 
-Users can create tasks, mark them as completed, and track their progress through a dashboard.
+## Project structure
 
-The application also includes a Productivity Score, which attempts to represent how productive the user has been while using the system.
+- `client/` — React + Vite frontend.
+- `server/` — Express API, Prisma schema, seed data, and score tests.
+- `Changes.md` — investigation findings, interpretation, formula, and implementation notes.
 
-## Tech Stack
+## Local setup
 
-### Frontend
-React (Vite)
+The backend expects a PostgreSQL database configured through the Prisma setup in `server/prisma.config.ts`.
 
-### Backend
-Node.js + Express
-
-### Database
-PostgreSQL
-
-### ORM
-Prisma
-
-## Getting Started
-
-### 1. Clone the Repository
-```bash
-git clone <repository-url>
-cd tasknest
-```
-
-### 2. Backend Setup
-Navigate to the server directory.
 ```bash
 cd server
 npm install
-```
-
-Configure the database connection in `prisma.config.ts`.
-
-Run database migrations.
-```bash
-npx prisma migrate dev
-```
-
-Start the backend server.
-```bash
+npm run prisma:seed
+npm test
 npm run dev
 ```
 
-### 3. Frontend Setup
-Navigate to the client directory.
+In a second terminal:
+
 ```bash
 cd client
 npm install
 npm run dev
 ```
 
-The frontend will run locally and connect to the backend server.
+Set `VITE_API_URL` when the frontend needs to connect to a deployed backend. The default is `http://localhost:5000`.
 
-## The Situation
+## Score formula
 
-The product team recently reviewed the Productivity Score feature.
+```text
+score = min(
+  (completed tasks × 10)
+  + (completed important tasks × 10)
+  + min(distinct completed days × 5, 20),
+  100
+)
+```
 
-The feature was originally implemented based on the following client request:
-
-“Add a productivity system so users can see how productive they are.
-It should consider important tasks and help users stay consistent.”
-
-However, after reviewing the system, engineers noticed several problems.
-
-The behavior of the productivity score is difficult to interpret.
-
-It is not clear what actions influence the score or how the score should represent productivity.
-
-Additionally, the requirement mentions important tasks, but the system currently does not support any way to mark tasks as important.
-
-## Your Mission
-
-You must investigate the existing implementation of the productivity system and determine whether it behaves meaningfully.
-
-While exploring the system, pay attention to:
-
-• how the productivity score is calculated
-• what actions affect the score
-• whether the implementation matches the original requirement
-
-If you discover inconsistencies or missing functionality, improve the system so the behavior becomes clearer and more meaningful.
+The score endpoint returns the total and its component values so the dashboard can explain the result rather than displaying an opaque number.

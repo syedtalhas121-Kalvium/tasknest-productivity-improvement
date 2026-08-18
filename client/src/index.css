@@ -273,6 +273,38 @@ body {
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  min-width: 0;
+}
+
+.task-copy {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 1rem;
+}
+
+.importance-btn.active {
+  color: #d97706;
+  background: #fef3c7;
+}
+
+.important-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.72rem;
+  font-weight: 800;
 }
 
 .custom-checkbox {
@@ -363,6 +395,32 @@ body {
   background: #4f46e5;
 }
 
+.important-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.important-toggle input {
+  accent-color: #d97706;
+  width: 16px;
+  height: 16px;
+}
+
+.score-breakdown {
+  max-width: 210px;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
 .animate-fade {
   animation: slideUp 0.5s ease-out forwards;
 }
@@ -380,6 +438,22 @@ body {
 }
 
 @media (max-width: 640px) {
+  .task-card-v2 {
+    padding: 1rem;
+  }
+
+  .task-main {
+    gap: 0.75rem;
+  }
+
+  .task-actions {
+    margin-left: 0.5rem;
+  }
+
+  .score-breakdown {
+    text-align: left;
+  }
+
   .navbar {
     padding: 0 1rem;
   }
